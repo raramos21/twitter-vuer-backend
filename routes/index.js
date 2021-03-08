@@ -20,7 +20,7 @@ router.get('/trending', (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-  search()
+  search(req.query.keyword)
     .then( results => {
       res.status(200).json(results);
     })
@@ -56,7 +56,7 @@ async function getTrending(){
   return results.data;
 }
 
-async function search(){
+async function search(keyword){
     let results = await axios({
       method: 'get',
       // url: 'https://api.twitter.com/2/tweets/search/recent',
@@ -65,7 +65,7 @@ async function search(){
           Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`
       },
       params: {
-        q: "UFC",
+        q: keyword,
         result_type: "popular"
       }
     });
