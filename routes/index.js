@@ -8,6 +8,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/test', (req,res) => {
+  res.status(200).json({test: 'gucci'});
+});
+
 router.get('/trending', (req, res) => {
   getTrending()
     .then( results => {
